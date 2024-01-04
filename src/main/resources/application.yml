@@ -1,10 +1,16 @@
-mail:
-  sender:
-    email: lozanocardona200938@gmail.com
-    password: "eltb vvhr nltr xzmr"
-
 spring:
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: lozanocardona200938@gmail.com
+    password: "eltb vvhr nltr xzmr"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
