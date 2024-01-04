@@ -1,5 +1,11 @@
 package com.proyecto.microservice.mail.sender.infraestructure.entry_point;
 
+import static com.proyecto.microservice.mail.sender.util.Constantes.CODE_OK_01;
+import static com.proyecto.microservice.mail.sender.util.Constantes.MESSAGE_OK_01;
+import static com.proyecto.microservice.mail.sender.util.Constantes.CODE_OK_02;
+import static com.proyecto.microservice.mail.sender.util.Constantes.MESSAGE_OK_02;
+import static com.proyecto.microservice.mail.sender.util.Constantes.CODE_IS_01;
+import static com.proyecto.microservice.mail.sender.util.Constantes.MESSAGE_IS_01;
 
 import com.proyecto.microservice.mail.sender.domain.common.ExceptionMailSender;
 import com.proyecto.microservice.mail.sender.domain.common.ResponseMailSender;
@@ -23,11 +29,11 @@ public class MailSenderController {
     public ResponseMailSender<MailDTO> sendMail(@RequestBody MailDTO mailDto){
         try{
             this.iMailSenderService.sendMail(mailDto);
-            return ResponseMailSender.<MailDTO>builder().status(HttpStatus.OK.value()).code("OK-01").message("Mensaje enviado.").data(mailDto).build();
+            return ResponseMailSender.<MailDTO>builder().status(HttpStatus.OK.value()).code(CODE_OK_01).message(MESSAGE_OK_01).data(mailDto).build();
         }catch (ExceptionMailSender e) {
             throw new ExceptionMailSender(e.getStatus(), e.getCode(), e.getMessage());
         }catch (Exception e) {
-            throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), "IS-01", "Error Server internal");
+            throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), CODE_IS_01, MESSAGE_IS_01);
         }
     }
 
@@ -35,11 +41,11 @@ public class MailSenderController {
     public ResponseMailSender<MailDTO> sendMailWithFile(@ModelAttribute MailFileDTO mailFileDto) {
         try {
             this.iMailSenderService.sendMailWithFile(mailFileDto);
-            return ResponseMailSender.<MailDTO>builder().status(HttpStatus.OK.value()).code("OK-02").message("Send message with file.").data(mailFileDto).build();
+            return ResponseMailSender.<MailDTO>builder().status(HttpStatus.OK.value()).code(CODE_OK_02).message(MESSAGE_OK_02).data(mailFileDto).build();
         }catch (ExceptionMailSender e) {
             throw new ExceptionMailSender(e.getStatus(), e.getCode(), e.getMessage());
         }catch (Exception e) {
-            throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), "IS-02", "Error Server internal");
+            throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), CODE_IS_01, MESSAGE_IS_01);
         }
     }
 

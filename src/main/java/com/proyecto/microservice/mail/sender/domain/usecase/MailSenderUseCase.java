@@ -1,5 +1,15 @@
 package com.proyecto.microservice.mail.sender.domain.usecase;
 
+
+import static com.proyecto.microservice.mail.sender.util.Constantes.CODE_IS_02;
+import static com.proyecto.microservice.mail.sender.util.Constantes.MESSAGE_IS_02;
+import static com.proyecto.microservice.mail.sender.util.Constantes.CODE_IS_03;
+import static com.proyecto.microservice.mail.sender.util.Constantes.MESSAGE_IS_03;
+import static com.proyecto.microservice.mail.sender.util.Constantes.CODE_IS_04;
+import static com.proyecto.microservice.mail.sender.util.Constantes.MESSAGE_IS_04;
+
+import static com.proyecto.microservice.mail.sender.util.Constantes.PREFIX_MAIL_ATTACHMENT;
+
 import com.proyecto.microservice.mail.sender.domain.common.ExceptionMailSender;
 import com.proyecto.microservice.mail.sender.domain.dto.MailDTO;
 import com.proyecto.microservice.mail.sender.domain.dto.MailFileDTO;
@@ -52,11 +62,11 @@ public class MailSenderUseCase implements  IMailSenderUseCase{
 
     private Path createFileTemp(String fileName, MultipartFile multipartFile) {
         try {
-            Path path = Files.createTempFile("mail_attachment_", fileName);
+            Path path = Files.createTempFile(PREFIX_MAIL_ATTACHMENT, fileName);
             Files.write(path, multipartFile.getBytes());
             return path;
         } catch (IOException e) {
-            throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), "IS-03", "Error Created File Temp");
+            throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), CODE_IS_02, MESSAGE_IS_02);
         }
     }
 
@@ -64,7 +74,7 @@ public class MailSenderUseCase implements  IMailSenderUseCase{
         try {
             return this.mailDtoMapper.createMimeMessage(this.javaMailSender.createMimeMessage(), this.javaMailSenderImpl.getUsername(), mailFileDto, fileName, path);
         } catch (MessagingException e) {
-            throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), "IS-04", "Error created MimeMessage");
+            throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), CODE_IS_03, MESSAGE_IS_03);
         }
     }
 
@@ -72,7 +82,7 @@ public class MailSenderUseCase implements  IMailSenderUseCase{
         try {
             Files.delete(path);
         }catch (Exception e) {
-            throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), "IS-02", "Error Delete File Temp");
+            throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), CODE_IS_04, MESSAGE_IS_04);
         }
     }
 
