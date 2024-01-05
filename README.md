@@ -30,17 +30,8 @@ A continuación, podremos ver un pequeño resumen de la integración y configura
 
 	**Refrescar el proyecto para que descargue las dependencias nuevas.**
 
-2. Agregar las configuraciones al application.yml
-![enter image description here](https://github.com/AlexGod05/mail-sender/assets/56901230/dd4ff561-ab19-47ff-ba9e-31eb1ee44bfe)
 
-	eureka:
-	  client:
-	    registerWithEureka: false  
-	    fetchRegistry: false  
-	    serviceUrl:
-	      defaultZone: http://localhost:8761/eureka/
-
-3. Agregar anotación en la clase principal MailSenderApplication
+2. Agregar anotación en la clase principal MailSenderApplication
 - `@EnableDiscoveryClient`
 ![enter image description here](https://github.com/AlexGod05/mail-sender/assets/56901230/194cf752-6f95-42dc-9870-f1c98a8028f8)
 
