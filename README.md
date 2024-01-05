@@ -30,8 +30,12 @@ A continuación, podremos ver un pequeño resumen de la integración y configura
 
 	**Refrescar el proyecto para que descargue las dependencias nuevas.**
 
+2. Configuracion de Eureka del lado del cliente.
+![image](https://github.com/AlexGod05/mail-sender/assets/56901230/efba26c4-15ad-49f7-a9fb-856d3cb31d49)
+	- Por defecto viene el puerto "8761".
+	- Con lo anterior podemos decidir a cual DiscoveryService queremos apuntar, para que nuestro servidor quede registrado.
 
-2. Agregar anotación en la clase principal MailSenderApplication
+3. Agregar anotación en la clase principal MailSenderApplication
 - `@EnableDiscoveryClient`
 ![enter image description here](https://github.com/AlexGod05/mail-sender/assets/56901230/194cf752-6f95-42dc-9870-f1c98a8028f8)
 
@@ -39,3 +43,12 @@ A continuación, podremos ver un pequeño resumen de la integración y configura
 
 Aca podemos visualizar que nuestro servicio de MailSender se registro como una instancia en el servidor de Eureka.
 ![enter image description here](https://github.com/AlexGod05/mail-sender/assets/56901230/b5014111-e7af-484c-bcf6-e50878994a56)
+
+
+
+
+
+
+
+
+
