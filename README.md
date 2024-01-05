@@ -1,9 +1,13 @@
-# Consumo del cliente
+# Consumo
+
 ### Insomnia
 
-> http://localhost:8080/mail-sender/send-mail
+    http://localhost:8080/mail-sender/send-mail
+
 ![image](https://github.com/AlexGod05/mail-sender/assets/56901230/89e92064-9b9e-41f0-88ae-20efcc1b6645)
-> http://localhost:8080/mail-sender/send-mail-with-file
+
+    http://localhost:8080/mail-sender/send-mail-with-file
+
 ![image](https://github.com/AlexGod05/mail-sender/assets/56901230/f67ad5a6-d745-41e2-ac6f-fad90c201184)
 
 
@@ -28,12 +32,13 @@ A continuación, podremos ver un pequeño resumen de la integración y configura
 
 2. Agregar las configuraciones al application.yml
 ![enter image description here](https://github.com/AlexGod05/mail-sender/assets/56901230/dd4ff561-ab19-47ff-ba9e-31eb1ee44bfe)
-eureka:  
-  client:  
-    registerWithEureka: false  
-    fetchRegistry: false  
-    serviceUrl:  
-      defaultZone: http://localhost:8761/eureka/
+
+	eureka:
+	  client:
+	    registerWithEureka: false  
+	    fetchRegistry: false  
+	    serviceUrl:
+	      defaultZone: http://localhost:8761/eureka/
 
 3. Agregar anotación en la clase principal MailSenderApplication
 - `@EnableDiscoveryClient`
