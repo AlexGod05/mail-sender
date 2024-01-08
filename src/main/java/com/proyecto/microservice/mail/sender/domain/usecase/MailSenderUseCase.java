@@ -18,10 +18,10 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,10 +33,10 @@ import java.nio.file.Path;
 @Component
 public class MailSenderUseCase implements  IMailSenderUseCase{
 
+    @Value("${mail.sender.email}")
+    private String mailSenderEmail;
     @Autowired
-    private JavaMailSenderImpl javaMailSenderImpl;
-    @Autowired
-    private JavaMailSender javaMailSender;
+    private  JavaMailSender javaMailSender;
     @Autowired
     private MailDtoMapper mailDtoMapper;
 
@@ -47,7 +47,7 @@ public class MailSenderUseCase implements  IMailSenderUseCase{
     }
 
     private SimpleMailMessage createSimpleMailMessage(MailDTO mailDto) {
-        return this.mailDtoMapper.createSimpleMailMessage(this.javaMailSenderImpl.getUsername(), mailDto);
+        return this.mailDtoMapper.createSimpleMailMessage(mailSenderEmail, mailDto);
     }
 
     //#2: CASO DE USO
@@ -72,7 +72,7 @@ public class MailSenderUseCase implements  IMailSenderUseCase{
 
     private MimeMessage createMimeMessage(String fileName, MailFileDTO mailFileDto, Path path) {
         try {
-            return this.mailDtoMapper.createMimeMessage(this.javaMailSender.createMimeMessage(), this.javaMailSenderImpl.getUsername(), mailFileDto, fileName, path);
+            return this.mailDtoMapper.createMimeMessage(this.javaMailSender.createMimeMessage(), mailSenderEmail, mailFileDto, fileName, path);
         } catch (MessagingException e) {
             throw new ExceptionMailSender(HttpStatus.INTERNAL_SERVER_ERROR.value(), CODE_IS_03, MESSAGE_IS_03);
         }

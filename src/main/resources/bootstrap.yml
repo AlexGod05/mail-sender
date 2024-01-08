@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: mail-sender
+
+server:
+  port: 8091
+
+servlet:
+  multipart:
+    max-file-size: 10MB
+    max-request-size: 10MB
+mail:
+  sender:
+    email: proyectomailsender@gmail.com
+    password: "drsa mfpw hlmp fdyz"
